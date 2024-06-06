@@ -75,7 +75,7 @@ impl<'a> ClientBuilder<'a> {
     pub async fn with_trust_repository<R: TrustRoot + ?Sized>(
         mut self,
         repo: &'a R,
-    ) -> Result<Self> {
+    ) -> Result<ClientBuilder<'a>> {
         let rekor_keys = repo.rekor_keys().await?;
         if !rekor_keys.is_empty() {
             self.rekor_pub_key = Some(rekor_keys[0]);
